@@ -8,5 +8,8 @@ def on_message(*args):
 
 io.on('message', on_message)
 
-io.wait(seconds=10)
+io.emit('hello_from_client')
+
+while True:
+    io.wait(seconds=0.1)
 
