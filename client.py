@@ -7,17 +7,9 @@ class Handlers(BaseNamespace):
         print("Incoming msg: %s" % msg)
 
 
-class ApiHandlers(BaseNamespace):
-
-    def on_ping(self, msg):
-        print("PONG %s" % msg)
-
-
-io = SocketIO('localhost', 9090, Handlers)
-#io_api = io.define(ApiHandlers, '/api/v1/socket')
+io = SocketIO('localhost', 9090, Handlers, resource="api/v1/socket")
 
 io.emit('hello_from_client')
-#io_api.emit('ping')
 
 io.wait(seconds=10)
 

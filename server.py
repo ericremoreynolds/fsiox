@@ -9,18 +9,12 @@ from flask_socketio import SocketIO, emit
 
 app = flask.Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
-io = SocketIO(app)
+io = SocketIO(app, resource="/api/v1/socket")
 
 
 @io.on('connect')
 def on_connect():
     print("Client connected")
-
-
-@io.on('ping', namespace='/api/v1/socket')
-def on_ping():
-    print("PING!")
-    emit('pong', "abc")
 
 
 @io.on('hello_from_client')
