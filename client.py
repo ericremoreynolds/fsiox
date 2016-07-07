@@ -1,15 +1,23 @@
-from socketIO_client import SocketIO
-
-io = SocketIO('localhost', 9090)
+from socketIO_client import SocketIO, BaseNamespace
 
 
-def on_message(*args):
-    print("Incoming msg: %s" % args)
+class Handlers(BaseNamespace):
 
-io.on('message', on_message)
+    def on_message_from_server(self, msg):
+        print("Incoming msg: %s" % msg)
+
+
+class ApiHandlers(BaseNamespace):
+
+    def on_ping(self, msg):
+        print("PONG %s" % msg)
+
+
+io = SocketIO('localhost', 9090, Handlers)
+#io_api = io.define(ApiHandlers, '/api/v1/socket')
 
 io.emit('hello_from_client')
+#io_api.emit('ping')
 
-while True:
-    io.wait(seconds=0.1)
+io.wait(seconds=10)
 
