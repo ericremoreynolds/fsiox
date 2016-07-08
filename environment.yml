@@ -1,4 +1,4 @@
-name: C:\Users\t000587\AppData\Local\Continuum\Miniconda\envs\fsiox
+name: fsiox
 dependencies:
 - pip=8.1.2=py35_0
 - python=3.5.2=0
